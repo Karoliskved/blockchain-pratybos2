@@ -10,6 +10,7 @@
 #include <random>
 #include <chrono>
 #include <time.h>
+#include <algorithm>
 #include "myHash.h"
 
 using std::cin;
@@ -28,6 +29,8 @@ using std::to_string;
 using std::exception;
 using std::bitset;
 using std::hex;
+using std::find_if;
+using std::distance;
 
 class user
 {
@@ -37,7 +40,7 @@ private:
     string userHash;
     double sum;
 public:
-    user(/* args */);
+    user(string name_, string userHash_, double sum_);
     ~user();
     //setters
     void setword(string word_){
@@ -58,11 +61,26 @@ public:
     void addmoney(double transactionsum){
         sum+=transactionsum;
     }
+    void takemoney(double transactionsum){
+        sum-=transactionsum;
+    }
+    string getname(){
+        return name;
+    }
+    string getuserhash(){
+        return userHash;
+    }
+    double getsum(){
+        return sum;
+    }
 
 };
 
-user::user(/* args */)
+user::user(string name_, string userHash_, double sum_)
 {
+    name=name_;
+    userHash=userHash_;
+    sum=sum_;
 }
 
 user::~user()
