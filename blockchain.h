@@ -15,6 +15,7 @@ public:
     //add block
     void gennewblock(pool tpool, users tusers){
         block newBlock;
+        newBlock.settimestamp();
         newBlock.addtrasnaction(tpool, tusers);
         if(blocks.size()!=0){
            newBlock.setprevHash(blocks[blocks.size()-1].getblockhash()); 
