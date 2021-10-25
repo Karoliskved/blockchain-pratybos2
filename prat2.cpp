@@ -30,26 +30,29 @@ using std::bitset;
 using std::hex;
 int main(){
 blockchain blockchaintest;
- pool tPool("transactions.txt");
+string string1="transactions.txt", string2="vartotojai.txt";
+
+ pool tPool("transactions.txt"), testpool(string1);
   //  users tusers("test.txt");
-  users tusers("vartotojai.txt");
-  blockchaintest.gennewblock(tPool, tusers);
-    cout << blockchaintest.getblock(0).getprevHash()<<endl;
+  users tusers("vartotojai.txt"), testusers(string2);
+  blockchaintest.gennewblock(string1, string2);
+ /*   cout << blockchaintest.getblock(0).getprevHash()<<endl;
     cout << blockchaintest.getblock(0).getversion()<<endl;
     cout << blockchaintest.getblock(0).gettimestamp()<<endl;
     cout << blockchaintest.getblock(0).gettransactionhash()<<endl;
     cout << blockchaintest.getblock(0).getnonce()<<endl;
     cout << blockchaintest.getblock(0).getdifficulty()<<endl;
-    cout << blockchaintest.getblock(0).getblockhash()<<endl;
-blockchaintest.gennewblock(tPool, tusers);
+    cout << blockchaintest.getblock(0).getblockhash()<<endl;*/
+blockchaintest.gennewblock(string1, string2);
 cout << "second block" << endl;
-   cout << blockchaintest.getblock(1).getprevHash()<<endl;
+  /* cout << blockchaintest.getblock(1).getprevHash()<<endl;
     cout << blockchaintest.getblock(1).getversion()<<endl;
     cout << blockchaintest.getblock(1).gettimestamp()<<endl;
     cout << blockchaintest.getblock(1).gettransactionhash()<<endl;
     cout << blockchaintest.getblock(1).getnonce()<<endl;
     cout << blockchaintest.getblock(1).getdifficulty()<<endl;
-    cout << blockchaintest.getblock(1).getblockhash()<<endl;
+    cout << blockchaintest.getblock(1).getblockhash()<<endl;*/
+    //blockchaintest.gennewblock(testpool, testusers);
 
   
 }

@@ -17,8 +17,9 @@ users(){
 
 }
 users(string filename){
-ifstream infile(filename);    
- for(int i=0; i!=1000; i++){
+ifstream infile(filename);   
+string s1; 
+for(int i=0; i!=1000; i++){
 string thash;  
 string user1; 
 double amount; 

@@ -13,10 +13,12 @@ public:
     blockchain();
     ~blockchain();
     //add block
-    void gennewblock(pool tpool, users tusers){
+    void gennewblock(string poolname, string usersname){
+        pool tpool(poolname);
+        users tusers(usersname);
         block newBlock;
         newBlock.settimestamp();
-        newBlock.addtrasnaction(tpool, tusers);
+        newBlock.addtrasnactions(tpool, tusers);
         if(blocks.size()!=0){
            newBlock.setprevHash(blocks[blocks.size()-1].getblockhash()); 
         }

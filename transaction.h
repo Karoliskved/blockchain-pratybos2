@@ -52,6 +52,9 @@ void setAmount( double amount_){
  int getAmount(){
      return amount;
  }
+ string getData(){
+     return sender+resever+to_string(amount);
+ }
 };
 
 

@@ -105,8 +105,9 @@ string getblockhash(){
 }
 // other func
 
-void addtrasnaction(pool tPool, users tusers);
+void addtrasnactions(pool tPool, users tusers);
 void findnonce();
+string generateMerklehash(vector<transaction> transactions);
 
 };
 block::block(){
@@ -115,16 +116,33 @@ block::block(){
 block::~block(){
 
 }
-void findsender(){
 
+string block::generateMerklehash(vector<transaction> transactions){
+    vector<string> merkle;
+    for(int i=0; i<transactions.size(); i++){
+        merkle.push_back(myHash(transactions[i].getData()));
+    }
+    while (merkle.size()!=1)
+    {
+        if(merkle.size()%2!=0){
+            merkle.push_back(merkle.back());
+        }
+        vector<string> newVector;
+        for(int i=0; i<merkle.size(); i=i+2){
+            newVector.push_back(myHash(merkle[i].append(merkle[i+1])));
+        }
+        merkle=newVector;
+    }
+    
+    return merkle[0];
 }
-
-
-void block::addtrasnaction(pool tPool, users tuser){
+void block::addtrasnactions(pool tPool, users tuser){
 ifstream infile("transactions.txt");  
+//ifstream infile("transactions.txt");  
 int index;  
 string allt;
 for(int i=0; i<100; i++){
+    
 /*string thash;  
 string user1; 
 string user2;
@@ -135,7 +153,7 @@ infile >> user1;
 infile >> user2;
 infile >> amount;*/
 bTransactions.push_back(tPool.gettrasnaction(i)); 
-allt+=tPool.gettrasnaction(i).getTranactionId()+""+tPool.gettrasnaction(i).getSender()+""+tPool.gettrasnaction(i).getResever()+""+to_string(tPool.gettrasnaction(i).getAmount());
+//allt+=tPool.gettrasnaction(i).getTranactionId()+""+tPool.gettrasnaction(i).getSender()+""+tPool.gettrasnaction(i).getResever()+""+to_string(tPool.gettrasnaction(i).getAmount());
 index=tuser.finduser(tPool.gettrasnaction(i).getSender());
 //cout << "sender " <<index << " user balance before " <<tuser.userbalance(index);
 tuser.takemoneyfromusser(index, tPool.gettrasnaction(i).getAmount());
@@ -149,12 +167,12 @@ tuser.addmoneytouser(index, tPool.gettrasnaction(i).getAmount());
 cout << "balance after " << tuser.userbalance(index) <<endl;*/
 tuser.savetofile("vartotojai.txt");
 }
-transactionHash=myHash(allt);
+transactionHash=generateMerklehash(bTransactions);
 for(int i=0; i<100; i++)
 {
     tPool.removetransaction(0);
 }
-tPool.savetofile("transaction2.txt");
+tPool.savetofile("transactions.txt");
 
 }
 
