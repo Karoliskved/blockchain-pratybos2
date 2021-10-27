@@ -17,9 +17,16 @@ users(){
 
 }
 users(string filename){
-ifstream infile(filename);   
-string s1; 
-for(int i=0; i!=1000; i++){
+ifstream infile1(filename);   
+ int number = 0;
+string stuff;
+while(infile1>> stuff){
+    number++; 
+}
+//cout << number << endl;
+ifstream infile(filename); 
+
+for(int i=0; i!=number/3; i++){
 string thash;  
 string user1; 
 double amount; 
@@ -72,12 +79,10 @@ void savetofile(string filename){
 int returnsize(){
     return allusers.size();
 }
+bool checkbalanceofuser(int i, double amount){
+    return allusers[i].checkbalance(amount);
+}
 };
-
-
-
-
-
 
 
 

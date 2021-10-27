@@ -108,6 +108,7 @@ string getblockhash(){
 void addtrasnactions(pool tPool, users tusers);
 void findnonce();
 string generateMerklehash(vector<transaction> transactions);
+void removetransactions(pool tPool);
 
 };
 block::block(){
@@ -138,35 +139,35 @@ string block::generateMerklehash(vector<transaction> transactions){
 }
 void block::addtrasnactions(pool tPool, users tuser){
 ifstream infile("transactions.txt");  
-//ifstream infile("transactions.txt");  
 int index;  
 string allt;
 for(int i=0; i<100; i++){
-    
-/*string thash;  
-string user1; 
-string user2;
-double amount; 
-
-infile >> thash;
-infile >> user1;
-infile >> user2;
-infile >> amount;*/
+index=tuser.finduser(tPool.gettrasnaction(i).getSender());
+if(tuser.checkbalanceofuser(index, tPool.gettrasnaction(i).getAmount())==true){
 bTransactions.push_back(tPool.gettrasnaction(i)); 
 //allt+=tPool.gettrasnaction(i).getTranactionId()+""+tPool.gettrasnaction(i).getSender()+""+tPool.gettrasnaction(i).getResever()+""+to_string(tPool.gettrasnaction(i).getAmount());
-index=tuser.finduser(tPool.gettrasnaction(i).getSender());
 //cout << "sender " <<index << " user balance before " <<tuser.userbalance(index);
 tuser.takemoneyfromusser(index, tPool.gettrasnaction(i).getAmount());
 /*cout <<" amount " << tPool.gettrasnaction(i).getAmount() ;
 cout << "balance after " << tuser.userbalance(index) <<endl;*/
 index=tuser.finduser(tPool.gettrasnaction(i).getResever());
 //cout << "resever " <<index<< " user balance before " <<tuser.userbalance(index); ;
-
 tuser.addmoneytouser(index, tPool.gettrasnaction(i).getAmount());
 /*cout <<" amount " << tPool.gettrasnaction(i).getAmount() ;
-cout << "balance after " << tuser.userbalance(index) <<endl;*/
-tuser.savetofile("vartotojai.txt");
+cout << "balance after " << tuser.userbalance(index) <<endl;*/    
 }
+else{
+   /* cout << "start" << endl;
+   cout << tuser.userbalance(index) << endl;
+  cout << tPool.gettrasnaction(i).getAmount() << endl;
+  cout << "end" << endl;*/
+  tPool.removetransaction(i);
+  i--;
+}
+
+
+}
+tuser.savetofile("vartotojai.txt");
 transactionHash=generateMerklehash(bTransactions);
 for(int i=0; i<100; i++)
 {
@@ -193,6 +194,12 @@ void block::findnonce(){
         nonce=i;
 
 }
-
+void block::removetransactions(pool tPool){
+for(int i=0; i<100; i++)
+{
+    tPool.removetransaction(0);
+}
+tPool.savetofile("transactions.txt");
+}
 
 #endif

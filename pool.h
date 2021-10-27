@@ -17,8 +17,15 @@ pool(){
 
 }
 pool(string filename){
-ifstream infile(filename);    
- for(int i=0; i!=10000; i++){
+ifstream infile1(filename);   
+ int number = 0;
+string stuff;
+while(infile1>> stuff){
+    number++; 
+}
+//cout << number << endl;
+ifstream infile(filename);   
+ for(int i=0; i!=number/4; i++){
      string thash;  
 string user1; 
 string user2;
@@ -28,8 +35,12 @@ infile >> thash;
 infile >> user1;
 infile >> user2;
 infile >> amount;
-transaction newTransaction(thash, user1, user2, amount);
-alltransactions.push_back(newTransaction);   
+if(checktransaction(thash, user1, user2, amount)==true){
+    
+  transaction newTransaction(thash, user1, user2, amount);
+  alltransactions.push_back(newTransaction);   
+}
+  
  }
 }
 // setters
@@ -51,6 +62,11 @@ void savetofile(string filename){
     offile << alltransactions[i].getResever() << endl;
     offile << alltransactions[i].getAmount() << endl;
     }
+}
+bool checktransaction(string thash_,string user1_, string user2_, int amount_){
+//cout << "og: " <<thash_ << endl;
+//cout << "new " << myHash(user1_+""+user2_+""+to_string(amount_)) << endl;
+return thash_==myHash(user1_+""+user2_+""+to_string(amount_));
 }
 };
 

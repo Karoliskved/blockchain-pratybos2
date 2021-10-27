@@ -24,6 +24,7 @@ public:
         }
         
         newBlock.findnonce();
+        newBlock.removetransactions(tpool);
         blocks.push_back(newBlock);
 
     }
@@ -39,8 +40,5 @@ blockchain::blockchain(/* args */)
 blockchain::~blockchain()
 {
 }
-
-
-
 
 #endif
