@@ -38,6 +38,7 @@ string prevHash="0";
 string version="0.1";
 string timestamp="0:00";
 string transactionHash;
+string miner="me";
 int nonce;
 string difficulty="3";
 string blockhash;
@@ -50,6 +51,9 @@ block();
 ~block();
 
 //setters
+void setminer(string miner_){
+    miner=miner_;
+}
 void setprevHash(string prevHash_){
     prevHash=prevHash_;
 }
@@ -91,6 +95,9 @@ string gettimestamp(){
 string gettransactionhash(){
     return transactionHash;
 }
+string getminer(){
+    return miner;
+}
 int getnonce(){
     return nonce;
 }
@@ -105,10 +112,11 @@ string getblockhash(){
 }
 // other func
 
-void addtrasnactions(pool tPool, users tusers);
+void addtrasnactions(pool & tPool, users & tuser);
 void findnonce();
+bool findnoncecomp(int noicesize);
 string generateMerklehash(vector<transaction> transactions);
-void removetransactions(pool tPool);
+void updatefiles(pool & tPool, users & tuser);
 
 };
 block::block(){
@@ -137,7 +145,7 @@ string block::generateMerklehash(vector<transaction> transactions){
     
     return merkle[0];
 }
-void block::addtrasnactions(pool tPool, users tuser){
+void block::addtrasnactions(pool & tPool, users & tuser){
 ifstream infile("transactions.txt");  
 int index;  
 string allt;
@@ -167,13 +175,8 @@ else{
 
 
 }
-tuser.savetofile("vartotojai.txt");
 transactionHash=generateMerklehash(bTransactions);
-for(int i=0; i<100; i++)
-{
-    tPool.removetransaction(0);
-}
-tPool.savetofile("transactions.txt");
+
 
 }
 
@@ -194,12 +197,36 @@ void block::findnonce(){
         nonce=i;
 
 }
-void block::removetransactions(pool tPool){
+bool block::findnoncecomp(int noicesize){
+
+    string info;
+    string result2="1";
+    int i=0;
+    info=prevHash+version+timestamp+transactionHash+difficulty;
+    while((result2[0]!='0' || result2[1]!='0' || result2[2]!='0' || result2[3]!='0') & i<noicesize /*|| result2[4]!='0' || result2[5]!='0'*/ ){
+            result2=myHash((info+to_string(i)));
+           
+            i++;
+            //cout << i << endl;
+        }
+        if(result2[0]=='0' & result2[1]=='0' & result2[2]=='0' & result2[3]=='0'){
+        blockhash=result2;
+        nonce=i;
+        return 1;
+        }
+        else{
+            return 0; 
+        }
+        
+
+}
+void block::updatefiles(pool & tPool, users & tuser){
+tuser.savetofile("vartotojai.txt");
+
 for(int i=0; i<100; i++)
 {
     tPool.removetransaction(0);
 }
 tPool.savetofile("transactions.txt");
 }
-
 #endif

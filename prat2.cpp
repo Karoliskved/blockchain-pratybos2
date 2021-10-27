@@ -29,35 +29,55 @@ using std::exception;
 using std::bitset;
 using std::hex;
 int main(){
+  int n;
 blockchain blockchaintest;
 string string1="transactions.txt", string2="vartotojai.txt";
 std::chrono::duration<double> diff;
 std::chrono::duration<double> diff1;
-auto start = std::chrono::high_resolution_clock::now();
+cout << "pasirinkite užduotį" <<endl;
+cin >> n;
+if(n==1){
+  auto start = std::chrono::high_resolution_clock::now();
   blockchaintest.gennewblock(string1, string2);
   auto end = std::chrono::high_resolution_clock::now();
   diff+=(end-start);
    std::cout << "1 bloko generavimas " << diff/std::chrono::milliseconds(1) << " ms\n";
-   /*cout << blockchaintest.getblock(0).getprevHash()<<endl;
+   cout << blockchaintest.getblock(0).getprevHash()<<endl;
     cout << blockchaintest.getblock(0).getversion()<<endl;
     cout << blockchaintest.getblock(0).gettimestamp()<<endl;
     cout << blockchaintest.getblock(0).gettransactionhash()<<endl;
     cout << blockchaintest.getblock(0).getnonce()<<endl;
     cout << blockchaintest.getblock(0).getdifficulty()<<endl;
-    cout << blockchaintest.getblock(0).getblockhash()<<endl;*/
+    cout << blockchaintest.getblock(0).getblockhash()<<endl;
+    cout << blockchaintest.getblock(0).gettransactions().size()<<endl;
     auto start1 = std::chrono::high_resolution_clock::now();
 blockchaintest.gennewblock(string1, string2);
 auto end1 = std::chrono::high_resolution_clock::now();
 cout << "second block" << endl;
 diff1+=(end1-start1);
    std::cout << "1 bloko generavimas " << diff1/std::chrono::milliseconds(1) << " ms\n";
-  /*cout << blockchaintest.getblock(1).getprevHash()<<endl;
+  cout << blockchaintest.getblock(1).getprevHash()<<endl;
     cout << blockchaintest.getblock(1).getversion()<<endl;
     cout << blockchaintest.getblock(1).gettimestamp()<<endl;
     cout << blockchaintest.getblock(1).gettransactionhash()<<endl;
     cout << blockchaintest.getblock(1).getnonce()<<endl;
     cout << blockchaintest.getblock(1).getdifficulty()<<endl;
-    cout << blockchaintest.getblock(1).getblockhash()<<endl;*/
+    cout << blockchaintest.getblock(1).getblockhash()<<endl;
+    cout << blockchaintest.getblock(0).gettransactions().size()<<endl;
+}
+if(n==2){
+  blockchaintest.mineblocks(string1, string2);
+    cout << blockchaintest.getblock(0).getprevHash()<<endl;
+    cout << blockchaintest.getblock(0).getversion()<<endl;
+    cout << blockchaintest.getblock(0).gettimestamp()<<endl;
+    cout << blockchaintest.getblock(0).gettransactionhash()<<endl;
+    cout << blockchaintest.getblock(0).getnonce()<<endl;
+    cout << blockchaintest.getblock(0).getdifficulty()<<endl;
+    cout << blockchaintest.getblock(0).getblockhash()<<endl;
+    cout << blockchaintest.getblock(0).gettransactions().size()<<endl;
+    cout << blockchaintest.getblock(0).getminer()<<endl;
+}
+
     //blockchaintest.gennewblock(testpool, testusers);
 
   
