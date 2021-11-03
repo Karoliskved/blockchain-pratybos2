@@ -1,6 +1,9 @@
 #ifndef BLOCK_H_INCLUDED
 #define BLOCK_H_INCLUDED
 #include <iostream>
+#include <algorithm>
+#include <list>
+#include <numeric>
 #include <bitset>
 #include <fstream>
 #include <sstream>
@@ -32,6 +35,7 @@ using std::to_string;
 using std::exception;
 using std::bitset;
 using std::hex;
+using std::iota;
 class block{
 private:
 string prevHash="0";
@@ -112,11 +116,19 @@ string getblockhash(){
 }
 // other func
 
-void addtrasnactions(pool & tPool, users & tuser);
+void addtrasnactions(pool & tPool, users & tuser, int seed);
 void findnonce();
 bool findnoncecomp(int noicesize);
 string generateMerklehash(vector<transaction> transactions);
 void updatefiles(pool & tPool, users & tuser);
+void getalltransactions(){
+    for(int i=0; i<bTransactions.size(); i++){
+        cout << bTransactions[i].getTranactionId() << endl;
+        cout << bTransactions[i].getSender() << endl;
+        cout << bTransactions[i].getResever() << endl;
+        cout << bTransactions[i].getAmount() << endl;
+    }
+}
 
 };
 block::block(){
@@ -145,39 +157,53 @@ string block::generateMerklehash(vector<transaction> transactions){
     
     return merkle[0];
 }
-void block::addtrasnactions(pool & tPool, users & tuser){
+void block::addtrasnactions(pool & tPool, users & tuser, int seed){
 ifstream infile("transactions.txt");  
 int index;  
 string allt;
-for(int i=0; i<100; i++){
-index=tuser.finduser(tPool.gettrasnaction(i).getSender());
-if(tuser.checkbalanceofuser(index, tPool.gettrasnaction(i).getAmount())==true){
-bTransactions.push_back(tPool.gettrasnaction(i)); 
+int i=0;
+int rvalue;
+int rindex;
+int poolsize=tPool.gettrasnactionssize();
+//cout << poolsize << endl;
+vector<int> rvalues(poolsize);
+iota(begin(rvalues), end(rvalues), 0);
+srand(seed);
+while(i<100 && i<poolsize){
+    rindex=rand()%rvalues.size();
+  int rvalue=rvalues[rand()%rvalues.size()];
+  rvalues.erase(rvalues.begin()+rindex);
+index=tuser.finduser(tPool.gettrasnaction(rvalue).getSender());
+if(tuser.checkbalanceofuser(index, tPool.gettrasnaction(rvalue).getAmount())==true){
+bTransactions.push_back(tPool.gettrasnaction(rvalue)); 
 //allt+=tPool.gettrasnaction(i).getTranactionId()+""+tPool.gettrasnaction(i).getSender()+""+tPool.gettrasnaction(i).getResever()+""+to_string(tPool.gettrasnaction(i).getAmount());
 //cout << "sender " <<index << " user balance before " <<tuser.userbalance(index);
-tuser.takemoneyfromusser(index, tPool.gettrasnaction(i).getAmount());
+tuser.takemoneyfromusser(index, tPool.gettrasnaction(rvalue).getAmount());
 /*cout <<" amount " << tPool.gettrasnaction(i).getAmount() ;
 cout << "balance after " << tuser.userbalance(index) <<endl;*/
-index=tuser.finduser(tPool.gettrasnaction(i).getResever());
+index=tuser.finduser(tPool.gettrasnaction(rvalue).getResever());
 //cout << "resever " <<index<< " user balance before " <<tuser.userbalance(index); ;
-tuser.addmoneytouser(index, tPool.gettrasnaction(i).getAmount());
+tuser.addmoneytouser(index, tPool.gettrasnaction(rvalue).getAmount());
 /*cout <<" amount " << tPool.gettrasnaction(i).getAmount() ;
 cout << "balance after " << tuser.userbalance(index) <<endl;*/    
+tPool.removetransaction(rvalue);
+i++;
 }
 else{
    /* cout << "start" << endl;
    cout << tuser.userbalance(index) << endl;
   cout << tPool.gettrasnaction(i).getAmount() << endl;
   cout << "end" << endl;*/
-  tPool.removetransaction(i);
-  i--;
+  tPool.removetransaction(rvalue);
+  poolsize--;
+  
 }
 
 
 }
 transactionHash=generateMerklehash(bTransactions);
-
-
+//cout << i << endl;
+//cout << transactionHash << endl;
 }
 
 void block::findnonce(){
@@ -223,10 +249,10 @@ bool block::findnoncecomp(int noicesize){
 void block::updatefiles(pool & tPool, users & tuser){
 tuser.savetofile("vartotojai.txt");
 
-for(int i=0; i<100; i++)
+/*for(int i=0; i<100 && i<tPool.gettrasnactionssize(); i++)
 {
     tPool.removetransaction(0);
-}
+}*/
 tPool.savetofile("transactions.txt");
 }
 #endif
