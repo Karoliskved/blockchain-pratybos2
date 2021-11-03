@@ -63,11 +63,13 @@ if(n==3){
   int i;
   blockchaintest.populateblockchain(string1, string2);
   cout << blockchaintest.getnumberofblocks() << endl;
-  cout << "issirinkite block ivede skaiciu arba baikite procesa ivede -1" << endl;
-  cin >>i;
+
   while(i!=-1){
     cout << "issirinkite block ivede skaiciu arba baikite procesa ivede -1" << endl;
     cin >> i;
+    if(i==-1){
+      break;
+    }
     if(i>blockchaintest.getnumberofblocks()){
       cout <<"ivestas blokas neegzistuoja" << endl;
     }
