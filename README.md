@@ -16,6 +16,7 @@ testavimo atvėjai:
 2. visom hashavimo funkcijom naudojama Pirmam darba sukurta myHash() funkcija
 3. kad blokas būtų įdėtas į blockchain jo hash kodas turi prasidėt su 4 nuliais
 4. į bloką transakcijos pasirenkamos atsitiktinai
+5. bloko hashas gaunanamus sudėjus į vieną stringą ir hashuojnant: prieštai buvusio bloko hashą, timestamp, version, merkle hash, nonce, difficulty
 
 ### pavyzdys kaip atrodo block informacija
 
