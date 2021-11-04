@@ -8,7 +8,7 @@ testavimo atvejai vykdomi įvedus užduoties kodą (1, 2 arba 3)
 testavimo atvėjai:
 1. Pirmos užduoties metu pridedami du blokai į blockchain ir išvedami duomeys, taip pat galima pasirinkti pamatyt bloką sudarančias visas transakcijas įvedant "y'
 2. Antros užduoties metu pavaizduojamas "decentralizuotos" blokų kasimas, kurio metu varžosi "kasėjai", kuris pirmas ras nonce, radus nonce pavaizduojami bloko duomenys ir kas iškasė
-3. Trečios užduoties metu į blockchain pridedami blokai tol kol nelieka transakcijų. Kai visi blokai sudėti galima pasirinkti pamatyti informaciją apie bet kurį blockchain priklausantį bloką ir jo transakcijos
+3. Trečios užduoties metu į blockchain pridedami blokai tol kol nelieka transakcijų. Kai visi blokai sudėti galima pasirinkti pamatyti informaciją apie bet kurį blockchain priklausantį bloką ir jo transakcijas
 ## Kita informacija
 
 
