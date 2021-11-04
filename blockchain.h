@@ -81,14 +81,14 @@ public:
         
     }
     void getInfoAboutBlock(int i){
-    cout << blocks[i].getprevHash()<<endl;
-    cout << blocks[i].getversion()<<endl;
-    cout << blocks[i].gettimestamp()<<endl;
-    cout << blocks[i].gettransactionhash()<<endl;
-    cout << blocks[i].getnonce()<<endl;
-    cout << blocks[i].getdifficulty()<<endl;
-    cout << blocks[i].getblockhash()<<endl;
-    cout << blocks[i].gettransactions().size()<<endl;
+    cout <<"block hash: " <<blocks[i].getblockhash()<<endl;
+    cout << "Prev hash: "<<blocks[i].getprevHash()<<endl;
+    cout <<"version: "<<blocks[i].getversion()<<endl;
+    cout << "timestamp: "<<blocks[i].gettimestamp()<<endl;
+    cout <<"merkle hash: " <<blocks[i].gettransactionhash()<<endl;
+    cout << "nonce: "<<blocks[i].getnonce()<<endl;
+    cout << "difficulty: "<<blocks[i].getdifficulty()<<endl;
+    cout <<"number of transactions: " <<blocks[i].gettransactions().size()<<endl;
     }
     void getInfoAboutTransaction(int i){
         blocks[i].getalltransactions();

@@ -37,6 +37,7 @@ blockchain blockchaintest;
 string string1="transactions.txt", string2="vartotojai.txt";
 std::chrono::duration<double> diff;
 std::chrono::duration<double> diff1;
+char input;
 cout << "pasirinkite uzduoti" <<endl;
 cin >> n;
 if(n==1){
@@ -46,7 +47,11 @@ if(n==1){
   diff+=(end-start);
    std::cout << "1 bloko generavimas " << diff/std::chrono::milliseconds(1) << " ms\n";
     blockchaintest.getInfoAboutBlock(0);
-
+cout <<"ar norite gaut bloko transakcijas" << endl;
+      cin>>input;
+      if(input=='y'){
+        blockchaintest.getInfoAboutTransaction(0);
+      }
     auto start1 = std::chrono::high_resolution_clock::now();
 blockchaintest.gennewblock(string1, string2);
 auto end1 = std::chrono::high_resolution_clock::now();
@@ -54,15 +59,24 @@ cout << "second block" << endl;
 diff1+=(end1-start1);
    std::cout << "1 bloko generavimas " << diff1/std::chrono::milliseconds(1) << " ms\n";
  blockchaintest.getInfoAboutBlock(1);
+ cout <<"ar norite gaut bloko transakcijas" << endl;
+      cin>>input;
+      if(input=='y'){
+        blockchaintest.getInfoAboutTransaction(1);
+      }
 }
 if(n==2){
   blockchaintest.mineblocks(string1, string2);
    blockchaintest.getInfoAboutBlock(0);
+   cout << "miner"<<blockchaintest.getblock(0).getminer() <<endl;
 }
 if(n==3){
+ 
+
   int i;
+ char input;
   blockchaintest.populateblockchain(string1, string2);
-  cout << blockchaintest.getnumberofblocks() << endl;
+  cout<< "bloku blockchaine yra:"<< blockchaintest.getnumberofblocks() << endl;
 
   while(i!=-1){
     cout << "issirinkite block ivede skaiciu arba baikite procesa ivede -1" << endl;
@@ -75,6 +89,11 @@ if(n==3){
     }
     else{
       blockchaintest.getInfoAboutBlock(i-1);
+      cout <<"ar norite gaut bloko transakcijas" << endl;
+      cin>>input;
+      if(input=='y'){
+        blockchaintest.getInfoAboutTransaction(i-1);
+      }
     }
   }
 }
