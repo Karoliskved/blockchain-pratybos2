@@ -15,6 +15,7 @@ testavimo atvėjai:
 1. vieno bloko generavimas užtrunka nuo 0.25 s. iki 0.4 s.
 2. visom hashavimo funkcijom naudojama Pirmam darba sukurta myHash() funkcija
 3. kad blokas būtų įdėtas į blockchain jo hash kodas turi prasidėt su 4 nuliais
+4. į bloką transakcijos pasirenkamos atsitiktinai
 
 ### pavyzdys kaip atrodo block informacija
 
