@@ -16,7 +16,7 @@ testavimo atvėjai:
 2. visom hashavimo funkcijom naudojama Pirmam darba sukurta myHash() funkcija
 3. kad blokas būtų įdėtas į blockchain jo hash kodas turi prasidėt su 4 nuliais
 
-###pavyzdys kaip atrodo block informacija
+### pavyzdys kaip atrodo block informacija
 
 block hash: 00009eb4d30f6e7f28eb6beea467cf4f3eb79535e9d94a36b7e7909fc158cd58
 
@@ -35,7 +35,7 @@ difficulty: 4
 number of transactions: 100
 
 
-###pavyzdys kaip atrodo transakcijos informacija
+### pavyzdys kaip atrodo transakcijos informacija
 
 transactionId: 1f065a8779930728089e1a368f06b133d2e8739f5eb3c59394928a9faf079bd2
 
