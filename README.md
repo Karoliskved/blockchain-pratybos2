@@ -19,17 +19,30 @@ testavimo atvėjai:
 pavyzdys kaip atrodo block informacija
 
 block hash: 00009eb4d30f6e7f28eb6beea467cf4f3eb79535e9d94a36b7e7909fc158cd58
+
 Prev hash: 0000d4af6ce5cb3810606de0a93df442c511bda312d06b4cd3a3c9cc08510e5d
+
 version: 0.1
+
 timestamp: 689363087.000000
+
 merkle hash: b87dd82606f12e7dc67a47e4f9110d215aa1c2ba46224b634c1f28f98d6e4451
+
 nonce: 28036
+
 difficulty: 4
+
 number of transactions: 100
+
 
 pavyzdys kaip atrodo transakcijos informacija
 
 transactionId: 1f065a8779930728089e1a368f06b133d2e8739f5eb3c59394928a9faf079bd2
+
 sender: vartotojas873
+
 resever: vartotojas615
+
 amount: 90800
+
+
