@@ -3,8 +3,8 @@
 
 1. Pirmiausia įrašomas timestamp sekundėmis
 2. paimamas prieš tai buvosiu bloko hashas, jei tai pirmas blokas tada previousblockhash lygu 0
-3. transakcijos įrašomos į pool objektą, įrašant tikrinamame ar transactionID sutampa su transakcijos duomenimis
-4. pridedant transakcijas į bloką tikrinama ar transakciją galima įvykdyti ir jos atliekamos
+3. transakcijos iš duomenų failo įrašomos į pool objektą, įrašant tikrinamame ar transactionID sutampa su transakcijos duomenimis
+4. pridedant transakcijas į bloką tikrinama ar transakciją galima įvykdyti tikrinant siuntėjo account balance ir jos atliekamos
 5. Sudėjus transakcijas į bloką ieškomas merkle hash
 6. ieškomas nonce, kad bloko hashas atitiktų sudėtingumą
 7. atnaujinami duomenų failai
